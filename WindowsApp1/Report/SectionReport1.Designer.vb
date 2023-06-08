@@ -20,13 +20,12 @@ Partial Public Class SectionReport1
         Dim resources As System.Resources.ResourceManager = New System.Resources.ResourceManager(GetType(SectionReport1))
         Me.PageHeader = New GrapeCity.ActiveReports.SectionReportModel.PageHeader()
         Me.Detail = New GrapeCity.ActiveReports.SectionReportModel.Detail()
-        Me.PageFooter = New GrapeCity.ActiveReports.SectionReportModel.PageFooter()
-        Me.GroupHeader1 = New GrapeCity.ActiveReports.SectionReportModel.GroupHeader()
-        Me.GroupFooter1 = New GrapeCity.ActiveReports.SectionReportModel.GroupFooter()
         Me.TextBox1 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         Me.TextBox2 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         Me.TextBox4 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         Me.TextBox6 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
+        Me.PageFooter = New GrapeCity.ActiveReports.SectionReportModel.PageFooter()
+        Me.GroupHeader1 = New GrapeCity.ActiveReports.SectionReportModel.GroupHeader()
         Me.TextBox7 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         Me.TextBox8 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         Me.TextBox9 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
@@ -39,6 +38,8 @@ Partial Public Class SectionReport1
         Me.TextBox14 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         Me.TextBox15 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         Me.TextBox16 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
+        Me.GroupFooter1 = New GrapeCity.ActiveReports.SectionReportModel.GroupFooter()
+        Me.TextBox17 = New GrapeCity.ActiveReports.SectionReportModel.TextBox()
         CType(Me.TextBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,6 +56,7 @@ Partial Public Class SectionReport1
         CType(Me.TextBox14, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextBox15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextBox16, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextBox17, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'PageHeader
@@ -64,25 +66,9 @@ Partial Public Class SectionReport1
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New GrapeCity.ActiveReports.SectionReportModel.ARControl() {Me.TextBox1, Me.TextBox2, Me.TextBox4, Me.TextBox6})
-        Me.Detail.Height = 0.1979167!
+        Me.Detail.Controls.AddRange(New GrapeCity.ActiveReports.SectionReportModel.ARControl() {Me.TextBox1, Me.TextBox2, Me.TextBox4, Me.TextBox6, Me.TextBox17})
+        Me.Detail.Height = 0.2083334!
         Me.Detail.Name = "Detail"
-        '
-        'PageFooter
-        '
-        Me.PageFooter.Name = "PageFooter"
-        '
-        'GroupHeader1
-        '
-        Me.GroupHeader1.Controls.AddRange(New GrapeCity.ActiveReports.SectionReportModel.ARControl() {Me.TextBox7, Me.TextBox8, Me.TextBox9, Me.TextBox10, Me.TextBox11, Me.TextBox12, Me.TextBox3, Me.TextBox5, Me.TextBox13, Me.TextBox14, Me.TextBox15, Me.TextBox16})
-        Me.GroupHeader1.DataField = "HdGroup"
-        Me.GroupHeader1.Height = 1.084!
-        Me.GroupHeader1.Name = "GroupHeader1"
-        Me.GroupHeader1.RepeatStyle = GrapeCity.ActiveReports.SectionReportModel.RepeatStyle.OnPage
-        '
-        'GroupFooter1
-        '
-        Me.GroupFooter1.Name = "GroupFooter1"
         '
         'TextBox1
         '
@@ -139,6 +125,18 @@ Partial Public Class SectionReport1
         Me.TextBox6.Text = "Adr"
         Me.TextBox6.Top = 0.00000001490116!
         Me.TextBox6.Width = 2.0!
+        '
+        'PageFooter
+        '
+        Me.PageFooter.Name = "PageFooter"
+        '
+        'GroupHeader1
+        '
+        Me.GroupHeader1.Controls.AddRange(New GrapeCity.ActiveReports.SectionReportModel.ARControl() {Me.TextBox7, Me.TextBox8, Me.TextBox9, Me.TextBox10, Me.TextBox11, Me.TextBox12, Me.TextBox3, Me.TextBox5, Me.TextBox13, Me.TextBox14, Me.TextBox15, Me.TextBox16})
+        Me.GroupHeader1.DataField = "HdGroup"
+        Me.GroupHeader1.Height = 1.084!
+        Me.GroupHeader1.Name = "GroupHeader1"
+        Me.GroupHeader1.RepeatStyle = GrapeCity.ActiveReports.SectionReportModel.RepeatStyle.OnPage
         '
         'TextBox7
         '
@@ -300,6 +298,19 @@ Partial Public Class SectionReport1
         Me.TextBox16.Top = 0.442!
         Me.TextBox16.Width = 1.625!
         '
+        'GroupFooter1
+        '
+        Me.GroupFooter1.Name = "GroupFooter1"
+        '
+        'TextBox17
+        '
+        Me.TextBox17.Height = 0.2!
+        Me.TextBox17.Left = 0.344!
+        Me.TextBox17.Name = "TextBox17"
+        Me.TextBox17.Text = "TextBox17"
+        Me.TextBox17.Top = 0!
+        Me.TextBox17.Width = 0.656!
+        '
         'SectionReport1
         '
         Me.MasterReport = False
@@ -333,6 +344,7 @@ Partial Public Class SectionReport1
         CType(Me.TextBox14, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextBox15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TextBox16, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextBox17, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -355,4 +367,5 @@ Partial Public Class SectionReport1
     Private WithEvents TextBox14 As GrapeCity.ActiveReports.SectionReportModel.TextBox
     Private WithEvents TextBox15 As GrapeCity.ActiveReports.SectionReportModel.TextBox
     Private WithEvents TextBox16 As GrapeCity.ActiveReports.SectionReportModel.TextBox
+    Private WithEvents TextBox17 As GrapeCity.ActiveReports.SectionReportModel.TextBox
 End Class

@@ -6,9 +6,36 @@ Imports System.Security.Cryptography
 Public Class SectionReport1
     Private myDT As DataTable
     Private asEnum As EnumerableRowCollection
+    Private CountLimitor As Integer
+
+    Public WriteOnly Property SetDataTable() As DataTable
+
+        Set(ByVal value As DataTable)
+            Me.myDT = value
+        End Set
+
+    End Property
     Private Sub SectionReport1_ReportStart(sender As Object, e As EventArgs) Handles MyBase.ReportStart
-        Me.DataSource = initDT()
+
+        If myDT.Rows.Count = 0 OrElse myDT.Rows.Count Mod 8 <> 0 Then
+
+            Dim _blankRow = myDT.NewRow
+            For i As Integer = 0 To myDT.Columns.Count - 1
+
+                _blankRow.Item(i) = ""
+
+            Next
+            myDT.Rows.Add(_blankRow)
+            myDT.AcceptChanges()
+
+        End If
+
+        Me.DataSource = myDT
+
     End Sub
+
+
+
 
     Private Function initDT() As DataTable
         Dim dataTable As New DataTable
@@ -72,22 +99,33 @@ Public Class SectionReport1
 
         Return dataTable
     End Function
+    Private Function GetLimiter() As Integer
+
+        Dim scale = (myDT.Rows.Count \ 8) + 1
+        Return scale * 8
+
+    End Function
 
     Private Sub SectionReport1_FetchData(sender As Object, eArgs As FetchEventArgs) Handles MyBase.FetchData
-        'Static count As Integer = 0
-        'count += 1
 
-        'If count = 7 Then
+        If myDT.Rows.Count Mod 8 <> 0 Then
+            CountLimitor = GetLimiter()
+            Static count As Integer = 0
+            count += 1
+            MessageBox.Show("count 1=" & count)
 
-        '    eArgs.EOF = True
-        '    MessageBox.Show(count)
-        '    MessageBox.Show(eArgs.EOF.ToString)
+            If count > CountLimitor Then
 
-        'Else
+                eArgs.EOF = True
 
-        '    eArgs.EOF = False
+            Else
 
-        'End If
+                eArgs.EOF = False
+
+            End If
+
+
+        End If
 
         'If eArgs.EOF = True Then
 
@@ -219,7 +257,7 @@ Public Class SectionReport1
         Fields.Add("NmemAdr")
         Fields.Add("JmemAdr")
         Fields.Add("JmemTel")
-        myDT = initDT()
+        'myDT = initDT()
 
         'asEnum = myDT.AsEnumerable().
         '                Select(Function(y) New With {
@@ -246,24 +284,27 @@ Public Class SectionReport1
 
     Private Sub Detail_Format(sender As Object, e As EventArgs) Handles Detail.Format
 
-        Static count As Integer = 0
+        If myDT.Rows.Count Mod 8 <> 0 Then
 
-        count += 1
-        'If count = 3 Then
+            Static count As Integer = 0
+            count += 1
+            MessageBox.Show("count2 = " & count)
 
-        '    Detail.NewPage = SectionReportModel.NewPage.After
+            If count Mod 8 = 0 AndAlso count < CountLimitor Then
 
-        'End If
-        'MessageBox.Show(count)
+                Detail.NewPage = SectionReportModel.NewPage.After
+
+            Else
+
+                Detail.NewPage = SectionReportModel.NewPage.None
+
+            End If
+
+        End If
 
     End Sub
 
-    Private Sub GroupHeader1_Format(sender As Object, e As EventArgs) Handles GroupHeader1.Format
-        Static count As Integer = 0
-        count += 1
-        'MessageBox.Show(Me.TextBox13.Value.ToString)
-        'MessageBox.Show(count)
-    End Sub
+
 
     Private Sub SectionReport1_PageStart(sender As Object, e As EventArgs) Handles MyBase.PageStart
         'MessageBox.Show("page start")
