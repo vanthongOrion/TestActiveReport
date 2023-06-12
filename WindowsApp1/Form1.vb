@@ -4,9 +4,70 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim dt = initDT()
         Dim viewer = New Form2
-        Dim rpt As New SectionReport1()
-        rpt.SetDataTable = dt
-        rpt.Run()
+        Dim rpt1 As New SectionReport1()
+        'rpt.SetDataTable = dt
+        'rpt.Run()
+
+
+
+
+
+        Dim jmemidList = dt.AsEnumerable.Select(Function(v) v.Field(Of String)("jmemid")).ToList
+
+
+        jmemidList.ForEach(Sub(jmemid)
+
+                               Using datatable As DataTable = dt.AsEnumerable.Where(Function(x) x.Field(Of String)("jmemid") = jmemid).CopyToDataTable
+
+                                   Dim r As DataRow = datatable.NewRow
+                                   r(0) = "thong"
+                                   datatable.Rows.InsertAt(r, 0)
+
+                                   If rpt1 Is Nothing Then
+
+                                       rpt1.SetDataTable = datatable
+                                       rpt1.Run()
+
+                                   Else
+
+                                       Using tempRpt As New SectionReport1
+
+                                           tempRpt.SetDataTable = datatable
+                                           tempRpt.Run()
+                                           For i As Integer = 0 To tempRpt.Document.Pages.Count - 1
+                                               rpt1.Document.Pages.Add(tempRpt.Document.Pages(i))
+                                           Next
+
+                                       End Using
+
+                                   End If
+
+                               End Using
+
+                           End Sub)
+
+        'For Each jmemid In jmemidList
+
+        '    Using dataTable As New DataTable
+
+        '        Dim row As DataRow = dataTable.NewRow
+        '        row(2) = "お客様"
+        '        dataTable.Rows.InsertAt(row, 0)
+
+        '        If rpt1 Is Nothing Then
+
+
+
+        '        End If
+
+
+
+        '    End Using
+
+
+        'Next
+
+
         'Dim rpt2 As New SectionReport1
         'rpt2.Run()
         'Dim rpt3 As New SectionReport1
@@ -21,7 +82,7 @@ Public Class Form1
         'Next
 
         'rpt.Document.Print(True, True, True)
-        viewer.Viewer1.Document = rpt.Document
+        viewer.Viewer1.Document = rpt1.Document
         viewer.Show()
     End Sub
 
@@ -150,15 +211,15 @@ Public Class Form1
 
 
 
-        'dataTable.Rows.Add(rows)
-        'dataTable.Rows.Add(rows2)
-        'dataTable.Rows.Add(rows3)
-        'dataTable.Rows.Add(row4)
-        'dataTable.Rows.Add(row5)
-        'dataTable.Rows.Add(row6)
-        'dataTable.Rows.Add(row7)
-        'dataTable.Rows.Add(row8)
-        'dataTable.Rows.Add(row9)
+        dataTable.Rows.Add(rows)
+        dataTable.Rows.Add(rows2)
+        dataTable.Rows.Add(rows3)
+        dataTable.Rows.Add(row4)
+        dataTable.Rows.Add(row5)
+        dataTable.Rows.Add(row6)
+        dataTable.Rows.Add(row7)
+        dataTable.Rows.Add(row8)
+        dataTable.Rows.Add(row9)
         dataTable.AcceptChanges()
 
         Return dataTable

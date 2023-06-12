@@ -7,6 +7,7 @@ Public Class SectionReport1
     Private myDT As DataTable
     Private asEnum As EnumerableRowCollection
     Private CountLimitor As Integer
+    Public dt As DataTable
 
     Public WriteOnly Property SetDataTable() As DataTable
 
@@ -56,6 +57,30 @@ Public Class SectionReport1
         dataTable.Columns.Add(dataColumn6)
         dataTable.Columns.Add(dataColumn7)
         dataTable.Columns.Add(dataColumn8)
+        'Dim row = dataTable.AsEnumerable().Where(Function(f) f.Field(Of String)("FirstName").ToLower = "john" AndAlso f.Field(Of String)("LastName").ToLower = "doe").CopyToDataTable
+
+        'Using rpt As New SectionReport
+
+        '    dataTable.Select.ToList.ForEach(Sub(r) r(0) = CStr(r(0)).ToLower)
+
+        'End Using
+
+        'Dim oCol As DataColumn
+        'Dim oRow As DataRow
+
+        'Using oTable As New DataTable
+        '    oCol = New DataColumn
+        '    oTable.Columns.Add(oCol)
+        '    oRow = oTable.NewRow
+        '    oRow(0) = "FALSE"
+        '    oTable.Rows.Add(oRow)
+
+        '    Console.WriteLine(oRow(0))
+
+        '    oTable.Select.ToList.ForEach(Sub(Row) Row(0) = CStr(Row(0)).ToLower)
+
+        '    Console.WriteLine(oRow(0))
+        'End Using
 
         Dim rows As DataRow
         rows = dataTable.NewRow
